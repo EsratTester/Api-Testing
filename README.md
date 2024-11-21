@@ -46,7 +46,6 @@ Pre-Request Scripts
 //First Nmae
 
 var firstName = pm.variables.replaceIn("{{$randomFirstName}}")
-
 pm.environment.set("firstName",firstName)
 console.log(firstName)
 
@@ -67,8 +66,6 @@ var depositPaid = pm.variables.replaceIn("{{$randomBoolean}}")
 pm.environment.set("depositPaid",depositPaid)
 console.log(depositPaid)
 
-
-
 //Date check in
 
 const moment = require("moment")
@@ -86,9 +83,6 @@ pm.environment.set("checkout",checkout)
 var addiNeed = pm.variables.replaceIn("{{$randomWord}}")
 pm.environment.set("addiNeed",addiNeed)
 console.log(addiNeed)
-
-
-
 
 ```
 Booking id
@@ -235,7 +229,6 @@ Body
 	"additionalneeds" : "{{addiNeed}}"
 }
 
-
 ```
 
 
@@ -252,7 +245,6 @@ pm.test("Last Name Validation Update", function(){
     pm.expect(json.lastname).to.eql(pm.environment.get("updated_lastName"));
 });
 
-
 pm.test("Total price Check" ,function(){
     pm.expect(json.totalprice).to.eql(parseInt(pm.environment.get("update_totalPrice")))
 })
@@ -261,11 +253,9 @@ pm.test("Deposit Paid Validation", function(){
     pm.expect(json.depositpaid.toString()).to.eql(pm.environment.get("depositPaid"))
 })
 
-
 pm.test("Check in Validation", function(){
     pm.expect(json.bookingdates.checkin).to.eql(pm.environment.get("checkin"))
 })
-
 
 pm.test("Check out Validation", function(){
     pm.expect(json.bookingdates.checkout).to.eql(pm.environment.get("checkout"))
@@ -274,8 +264,7 @@ pm.test("Check out Validation", function(){
 ```
 
 
-```
-# Report Configure
+## Report Configure
 
 **Using Newman**
 Newman is a command-line Collection Runner for Postman. It enables you to run and test a Postman Collection directly from the command line.
@@ -304,5 +293,8 @@ newman run CollectionName.json -e EnvironmentName.json -r HTML
 Or
 ```
 newman run CollectionName.json -e EnvironmentName.json -r htmlextra
+```
+![_C__Users_esrat_OneDrive_Desktop_API_newman_Testing-2024-11-19-08-53-02-922-0 html (1)](https://github.com/user-attachments/assets/157b0f0e-03d8-46f0-b353-a46a34bacd9e)
 
-![_C__Users_esrat_OneDrive_Desktop_API_newman_Testing-2024-11-19-08-53-02-922-0 html (1)](https://github.com/user-attachments/assets/bb4951fa-3d46-4953-a9a4-4651575b8d96)
+
+ 
