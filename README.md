@@ -305,4 +305,4 @@ Or
 ```
 newman run CollectionName.json -e EnvironmentName.json -r htmlextra
 
-!![_C__Users_esrat_OneDrive_Desktop_API_newman_Testing-2024-11-19-08-53-02-922-0 html (1)](https://github.com/user-attachments/assets/bb4951fa-3d46-4953-a9a4-4651575b8d96)
+![_C__Users_esrat_OneDrive_Desktop_API_newman_Testing-2024-11-19-08-53-02-922-0 html (1)](https://github.com/user-attachments/assets/bb4951fa-3d46-4953-a9a4-4651575b8d96)
