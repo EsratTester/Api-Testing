@@ -26,6 +26,7 @@ https://nodejs.org/en/
 **Tests Script**
 
 
+````
 var statusCode = pm.response.code
 
 console.log(statusCode)
