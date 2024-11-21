@@ -1,14 +1,16 @@
 # Introduction
 
-This documentation provides a comprehensive overview of the API testing suite for thetestingworldapi.com, featuring a Postman collection and environment tailored for testing functionalities related to student management. The API enables tasks like retrieving student information, creating new student profiles, accessing specific student data, adding technical skills, and managing student addresses.
+This documentation provides a comprehensive overview of the API testing suite for herokuapp.com , featuring a Postman collection and environment tailored for testing functionalities related to student management. The API enables tasks like retrieving Booking information, creating new Booking, Token,Update Booking,Delete Booking.
 
 # Summary
-I have completed an API test of Get all students, Create a Student, Get Specific created student, Create technical skills, Create student's address, and finally Get student details https://thetestingworldapi.com/
-![Screenshot 2024-03-19 224125](https://github.com/tester-tanim/API-Testing/assets/68701811/1580c0a7-5b3e-419c-8f4e-340649897fdd)
+I have completed an API test of Get all Bookings, Create a new Booking, Token,Update Booking,Delete Booking, and finally Get Booking details https://herokuapp.com/
 
-Within this API testing framework, student information is examined, and diverse tests are conducted using various HTTP methods such as POST, GET, DELETE, and PUT.
 
-Summary: A total of 6 Test Scripts and 22 assertions were done. All of them passed with 0 failed tests and 0 skipped tests. The number of iteration was 1.
+Within this API testing framework, Booking information is examined, and diverse tests are conducted using various HTTP methods such as POST, GET, DELETE, and PUT.
+
+Summary: A total of 5 Test Scripts and 12 assertions were done. All of them passed with 1 failed tests and 0 skipped tests. The number of iteration was 1.
+!![Screenshot_1](https://github.com/user-attachments/assets/09d7e139-7ab9-4687-9a44-20dfab1887d9)
+
 
 # Requirements
 Postman
@@ -19,161 +21,183 @@ https://nodejs.org/en/
 
 # Details
 
-### Get Student
+### Get Booking
 
 **Tests Script**
 
-```var JsonData = pm.response.json()
-console.log(JsonData.length)
 
-var status_code = pm.response.code
-if(status_code==200){
-pm.test("200 ; STATUS : SUCCESS", function () {
-    pm.response.to.have.status(200);
-});
+var statusCode = pm.response.code
+
+console.log(statusCode)
+
+if(statusCode==200){
+   
+var json = pm.response.json()
+
+
+pm.test("First Name Validation", function(){
+    pm.expect(json.firstname).to.eql(pm.environment.get("firstName"))
+})
+
+pm.test("Last Name Validation", function(){
+    pm.expect(json.lastname).to.eql(pm.environment.get("lastName"))
+})
+
+pm.test("Total price Check" ,function(){
+    pm.expect(json.totalprice.toString()).to.eql(pm.environment.get("totalPrice"))
+})
+
+
+//pm.test("Total price Check" ,function(){
+   // pm.expect(json.totalprice).to.eql(parseInt(pm.environment.get("totalPrice")))
+//})
+
+
+// pm.test("Deposit Paid Validation" ,function(){
+//     pm.expect(pm.environment.get("depositPaid")).to.equal(json.depositpaid.toString())
+// })
+
+pm.test("Deposit Paid Validation", function(){
+    pm.expect(json.depositpaid.toString()).to.eql(pm.environment.get("depositPaid"))
+})
+
+
+pm.test("Check in Validation", function(){
+    pm.expect(json.bookingdates.checkin).to.eql(pm.environment.get("checkin"))
+})
+
+
+pm.test("Check out Validation", function(){
+    pm.expect(json.checkout).to.eql(pm.environment.get("checkout"))
+})
+
+}else if(statusCode==404){
+ pm.test("Not Found")
 }
-else if(status_code==201){
-    pm.test("201 ; STATUS : CREATED", function () {
-    pm.response.to.have.status(201);
-})}
-else if(status_code==202){
-    pm.test("202 ; STATUS : ACCEPTED", function () {
-    pm.response.to.have.status(202);
-})}
-else if(status_code==400){
-    pm.test("400 ; STATUS : BAD REQUEST", function () {
-    pm.response.to.have.status(400);
-})}
-else if(status_code==401){
-    pm.test("401 ; STATUS : UNAUTHORIZED", function () {
-    pm.response.to.have.status(401);
-})}
-else if(status_code==402){
-    pm.test("402 ; STATUS : PAYMENT REQUIRED", function () {
-    pm.response.to.have.status(402);
-})}
-else if(status_code==403){
-    pm.test("403 ; STATUS : FORBIDDEN", function () {
-    pm.response.to.have.status(403);
-})}
-else if(status_code==404){
-    pm.test("404 ; STATUS : NOT FOUND", function () {
-    pm.response.to.have.status(404);
-})}
-else if(status_code==405){
-    pm.test("405 ; STATUS : METHOD NOT ALLOWED", function () {
-    pm.response.to.have.status(405);
-})}
-else if(status_code==500){
-    pm.test("500 ; STATUS : INTERNAL SERVER ERROR", function () {
-    pm.response.to.have.status(500);
-})}
-else if(status_code==501){
-    pm.test("501 ; STATUS : NOT IMPLEMENTED", function () {
-    pm.response.to.have.status(501);
-})}
-else if(status_code==502){
-    pm.test("502 ; STATUS : BAD GATEWAY", function () {
-    pm.response.to.have.status(502);
-})}
-else if(status_code==503){
-    pm.test("503 ; STATUS : SERVICE UNAVAILABLE", function () {
-    pm.response.to.have.status(503);
-})}
+else if(statusCode==201){
+ pm.test("Created")
+}
+
+else if(statusCode==202){
+ pm.test("Accepted")
+}
+else if(statusCode==204){
+ pm.test("No Content")
+}
+
+else if(statusCode==301){
+ pm.test("Moved Permanently")
+}
+
+ else if(statusCode==400){
+ pm.test("Bad Request")
+}
+
+ else if(statusCode==401){
+ pm.test("Unauthorized")
+}
+
+else if(statusCode==403){
+ pm.test("Forbidden")
+}
+
+else if(statusCode==405){
+ pm.test("Method Not Allowed")
+}
+
+else if(statusCode==408){
+ pm.test("Request Timeout")
+}
+else if(statusCode==429){
+ pm.test("Too Many Requests")
+}
+else if(statusCode==500){
+ pm.test("Internal Server Error")
+}
+
+else{
+  pm.test("Something went rong...")
+}
+
 ````
-Create Student
+Create Booking
 
 Body
 
 ```{ 
-"first_name": "{{first_name}}", 
-"middle_name": "{{middle_name}}", 
-"last_name": "{{last_name}}", 
-"date_of_birth": "{{date_of_birth}}" 
+{
+	"firstname" : "{{firstName}}",
+	"lastname" : "{{lastName}}",
+	"totalprice" : {{totalPrice}},
+	"depositpaid" : {{depositPaid}},
+	"bookingdates" : {
+    	"checkin" : "{{checkin}}",
+    	"checkout" : "{{checkout}}"
+	},
+	"additionalneeds" : "{{addiNeed}}"
 }
-```
+
+
 Pre-Request Scripts
 ```
-var firstname = pm.variables.replaceIn("{{$randomFirstName}}")
-console.log("First Name: "+firstname)
-pm.environment.set("first_name",firstname)
+//First Nmae
 
-var lastname = pm.variables.replaceIn("{{$randomLastName}}")
-console.log("Middle Name: "+lastname)
-pm.environment.set("middle_name",lastname)
+var firstName = pm.variables.replaceIn("{{$randomFirstName}}")
 
-var lastname = pm.variables.replaceIn("{{$randomLastName}}")
-console.log("Last Name: "+lastname)
-pm.environment.set("last_name",lastname)
+pm.environment.set("firstName",firstName)
+console.log(firstName)
 
-const moment = require('moment')
+//Last Name
+
+var lastName = pm.variables.replaceIn("{{$randomLastName}}")
+pm.environment.set("lastName",lastName)
+console.log(lastName)
+
+//price
+//var totalPrice = pm.variables.replaceIn("{{$randomPrice}}")
+var totalPrice = pm.variables.replaceIn("{{$randomInt}}")
+pm.environment.set("totalPrice",totalPrice)
+console.log(totalPrice)
+
+//depositpaid
+var depositPaid = pm.variables.replaceIn("{{$randomBoolean}}")
+pm.environment.set("depositPaid",depositPaid)
+console.log(depositPaid)
+
+
+
+//Date check in
+
+const moment = require("moment")
 const today = moment()
-console.log(today.format("YYYY-MM-DD"))
-pm.environment.set("date_of_birth", today.add(2,'d').format("YYYY-MM-DD"))
+//console.log(today.format("YYYY-MM-DD"))
+//console.log(today.add(1,'M').format("YYYY-MM-DD")) //present dater/monther sathe 1 jog hobe
+//console.log(today.subtract(1,'M').format("YYYY-MM-DD"))
+var checkin = today.add(1,'d').add(3,'M').format("YYYY-MM-DD")
+pm.environment.set("checkin",checkin)
+
+var checkout = today.add(2,'d').format("YYYY-MM-DD")
+pm.environment.set("checkout",checkout)
+
+//additional Need
+var addiNeed = pm.variables.replaceIn("{{$randomWord}}")
+pm.environment.set("addiNeed",addiNeed)
+console.log(addiNeed)
+
+
 ```
 Tests Script
 ```
 var jsonData = pm.response.json()
-pm.environment.set("id", jsonData.id)
-console.log(jsonData.id)
+pm.environment.set("id",jsonData.bookingid)
 
-var JsonData = pm.response.json()
-
-var status_code = pm.response.code
-if(status_code==200){
-pm.test("200 ; STATUS : SUCCESS", function () {
-    pm.response.to.have.status(200);
-});
-}
-else if(status_code==201){
-    pm.test("201 ; STATUS : CREATED", function () {
-    pm.response.to.have.status(201);
-})}
-else if(status_code==202){
-    pm.test("202 ; STATUS : ACCEPTED", function () {
-    pm.response.to.have.status(202);
-})}
-else if(status_code==400){
-    pm.test("400 ; STATUS : BAD REQUEST", function () {
-    pm.response.to.have.status(400);
-})}
-else if(status_code==401){
-    pm.test("401 ; STATUS : UNAUTHORIZED", function () {
-    pm.response.to.have.status(401);
-})}
-else if(status_code==402){
-    pm.test("402 ; STATUS : PAYMENT REQUIRED", function () {
-    pm.response.to.have.status(402);
-})}
-else if(status_code==403){
-    pm.test("403 ; STATUS : FORBIDDEN", function () {
-    pm.response.to.have.status(403);
-})}
-else if(status_code==404){
-    pm.test("404 ; STATUS : NOT FOUND", function () {
-    pm.response.to.have.status(404);
-})}
-else if(status_code==405){
-    pm.test("405 ; STATUS : METHOD NOT ALLOWED", function () {
-    pm.response.to.have.status(405);
-})}
-else if(status_code==500){
-    pm.test("500 ; STATUS : INTERNAL SERVER ERROR", function () {
-    pm.response.to.have.status(500);
-})}
-else if(status_code==501){
-    pm.test("501 ; STATUS : NOT IMPLEMENTED", function () {
-    pm.response.to.have.status(501);
-})}
-else if(status_code==502){
-    pm.test("502 ; STATUS : BAD GATEWAY", function () {
-    pm.response.to.have.status(502);
-})}
-else if(status_code==503){
-    pm.test("503 ; STATUS : SERVICE UNAVAILABLE", function () {
-    pm.response.to.have.status(503);
-})}
 ```
+Token
+```
+var jsonData = pm.response.json()
+pm.environment.set("access_token",jsonData.token)
+
+
 ## Get Specific Student
 Tests Script
 ```
