@@ -9,7 +9,8 @@ I have completed an API test of Get all Bookings, Create a new Booking, Token,Up
 Within this API testing framework, Booking information is examined, and diverse tests are conducted using various HTTP methods such as POST, GET, DELETE, and PUT.
 
 Summary: A total of 5 Test Scripts and 12 assertions were done. All of them passed with 1 failed tests and 0 skipped tests. The number of iteration was 1.
-!![Screenshot_1](https://github.com/user-attachments/assets/09d7e139-7ab9-4687-9a44-20dfab1887d9)
+
+![Screenshot_1](https://github.com/user-attachments/assets/09d7e139-7ab9-4687-9a44-20dfab1887d9)
 
 
 # Requirements
